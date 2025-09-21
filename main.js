@@ -105,6 +105,15 @@ async function collection(source, target, options = {}) {
   }
 
   async function updateNotepad(notepadDetail, newWord) {
+    let res = await fetch(`https://open.maimemo.com/open/api/v1/vocabulary?spelling=${newWord}`, {
+      method: 'GET',
+      headers: headers,
+    })
+
+    if (!res.data.data.voc) {
+      throw '该单词不在墨墨背单词的词库中。请尝试调整单词的时态或形态'
+    }
+
     try {
       const currentContent = notepadDetail.content || ''
 
@@ -120,7 +129,7 @@ async function collection(source, target, options = {}) {
         },
       }
 
-      let res = await fetch(`https://open.maimemo.com/open/api/v1/notepads/${notepadDetail.id}`, {
+      res = await fetch(`https://open.maimemo.com/open/api/v1/notepads/${notepadDetail.id}`, {
         method: 'POST',
         headers: headers,
         body: Body.json(updateData),
