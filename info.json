@@ -6,6 +6,12 @@
   "homepage": "https://github.com/MahoushoujoMadoka/pot-app-collection-plugin-maimemo",
   "needs": [
     { "key": "api_token", "display": "API Token" },
-    { "key": "word_list_title", "display": "词本标题" }
+    { "key": "word_list_title", "display": "词本标题" },
+    {
+      "key": "enable_word_check",
+      "display": "保存前检查墨墨是否收录该单词（仅在添加单个单词时生效）",
+      "type": "select",
+      "options": { "enable": "启用", "disable": "禁用" }
+    }
   ]
 }
